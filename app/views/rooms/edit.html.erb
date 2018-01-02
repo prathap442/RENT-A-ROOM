@@ -1,0 +1,29 @@
+    <%@room.errors.full_messages.each do |msg|%>
+    <%=msg%>
+    <%end%>
+<%= form_for @room do |f|%>
+  <label for="room_name">RoomName</label>
+   <%=f.text_field :name%>
+   <label for="room_description">Description</label>
+   <%= f.text_field :description%>
+   <label for="room_price">PRICE</label>
+   <%= f.number_field :price %>
+   <label for="room_rules">RULES</label>
+   <%=f.text_field :rules%>
+   <label for="room_address">ADDRESS</label>
+   <%=f.text_field :address%>
+   <label for="room_images">IMAGES</label>
+   <%=f.file_field :images%>
+   <label for="room_latitude">LATITUDE</label>
+   <%=f.number_field :latitude%>
+   <label for="room_city_id">CITYSELECT</label>
+   <%= f.collection_select :city_id,City.all,:id,:name%>
+   <label for="room_longitude">LONGITUDE</label>
+   <%=f.number_field :longitude%>
+  <label for="room_amenities">Amenitites</label>
+   <%= f.collection_check_boxes :amenity_ids,Amenity.all,:id,:name do |name|%>
+     <%=name.check_box%>
+     <%=name.label%>
+   <%end%>
+   <%= f.submit "SubmitRoomDetails"%>
+<%end%>

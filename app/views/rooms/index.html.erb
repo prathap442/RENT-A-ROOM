@@ -1,0 +1,43 @@
+#this has all thee rooms lists 
+
+<ul>
+<% @rooms.each do |room|%>
+  <li> NAME:<%=room.name%></li>
+  <li> Description<%=room.description%></li>
+  <li>PRICE:<%=room.price%></li>
+  <li>RULES:<%=room.rules%></li>
+  <li>AddRESS:<%=room.address%></li>
+     <%if room.images.nil?%>
+          <%puts "NO ROOMS FOR THIS USER"%>
+     <%end%>
+  <li>images:<%=image_tag(room.images.to_s,size: "40x50")%></li>
+  <li>latitude: <%=room.latitude%></li>
+  <li>longitude: <%=room.longitude%></li>
+  <li>city_id:<%=room.city.name%></li>
+  <li>guest:<%=room.user.username%></li>
+      role_id:<%=room.user.role_id%>
+      <%if ((user_signed_in?) && (can? :destroy,room))%>
+      <%= link_to "delete the room details",room_path(room.id),method: :delete %>
+      <%= link_to "edit the room details",edit_room_path(room.id) %>
+      <%= link_to "add the new amenity",new_amenity_path%>
+     <% end %>
+   
+  <iframe
+  width="400"
+  height="400"
+  frameborder="0" style="border:0"
+  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAMnv3UJmt3oqflqpYPzpxx8Bc-_WMtD9A
+    &q=<%= room.latitude %>, <%=room.longitude%>" allowfullscreen>
+  </iframe>
+  <br/>
+  <br/>
+  <br/>
+<%end%>
+</ul>
+<%if(user_signed_in?)%>
+    <%= link_to "add a new room",new_room_path %>
+<%end%>
+<%= will_paginate @rooms %>
+   
+
+

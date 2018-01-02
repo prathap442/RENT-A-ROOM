@@ -1,0 +1,20 @@
+   <br/>
+   NAME<%=@room.name%><br/>
+   DESCRIPTION:<%=@room.description%><br/>
+   PRICE:<%=@room.price%><br/>
+   RuLES:<%=@room.rules%><br/>
+   ADDRESS:<%=@room.address%><br/>
+   IMAGES:<%=image_tag(@room.images,size: "100x100")%><br/>
+   latitude:<%=@room.latitude%><br/>
+   Longitude:<%=@room.longitude%><br/>
+   CITY:<%=@room.city.name%><br/>
+   USER:<%=@room.user.username%><br/>
+    <%@room.amenities.each do |amenity|%>
+       <%=amenity.name%>----
+       <%=amenity.description%><br/>
+    <%end%>
+<%if(user_signed_in?)||(@room.user_id==2)%>
+   <%= link_to "DELETE THE ROOM", room_path(@room.id),method: :delete%><br/>
+   <%= link_to "EDIT THE ROOM DETAILS",edit_room_path(@room.id)%><br/>
+   <%= link_to "ADD A new AMENITY",new_amenity_path %>
+<%end%>   
