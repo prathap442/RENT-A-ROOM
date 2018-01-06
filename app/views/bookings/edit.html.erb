@@ -1,0 +1,12 @@
+<h1>Editing Booking</h1>
+<%if((current_user.id==@booking.room.user_id))%>
+    binding.pry
+   <label for="booking_is_confirmed">IS_Confirmed</label>
+   <%= form_for @booking do |f|%>
+     <%= f.radio_button :is_confirmed,true %> Confirm
+     <%= f.radio_button :is_confirmed,false %> Don't Confirm
+     <%= f.submit %>
+   <% end%>
+<%end%>
+<%= link_to 'Show', @booking %> |
+<%= link_to 'Back', bookings_path %>

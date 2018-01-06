@@ -9,12 +9,31 @@
    Longitude:<%=@room.longitude%><br/>
    CITY:<%=@room.city.name%><br/>
    USER:<%=@room.user.username%><br/>
+   Authorization by admin:<%= @room.is_authorized %><br/> 
     <%@room.amenities.each do |amenity|%>
        <%=amenity.name%>----
        <%=amenity.description%><br/>
     <%end%>
-<%if(user_signed_in?)||(@room.user_id==2)%>
+<%if(user_signed_in?)||(@room.user_id==current_user.id)%>
    <%= link_to "DELETE THE ROOM", room_path(@room.id),method: :delete%><br/>
    <%= link_to "EDIT THE ROOM DETAILS",edit_room_path(@room.id)%><br/>
    <%= link_to "ADD A new AMENITY",new_amenity_path %>
-<%end%>   
+<%end%> 
+<%if(user_signed_in?)%>
+  <%= @booking.errors.full_messages.each do |msg|%>
+     <%=msg%><br/>
+  <%end%>
+
+  <%= form_for @booking do |f|%>
+  <label for="booking_start_date">Start_date</label>
+  <%= f.date_field :start_date %>
+  <label for="booking_end_date">End_date</label>
+  <%= f.date_field :end_date%>
+  <label for="booking_price">booking_price</label>
+  <%= f.hidden_field :price,value: @room.price%>
+  <%= f.hidden_field :room_id,value: @room.id%>
+  <%= f.submit "Book the room" %>
+  <%end%>
+  <%=link_to "Your previous bookings",  bookings_path%>      
+<%end%> 
+    

@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   belongs_to :role
   has_many :rooms
+  has_many :bookings
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   validates_presence_of :first_name,:last_name,:username,:email,:mobile_number,:role_id

@@ -1,8 +1,9 @@
-    <%@room.errors.full_messages.each do |msg|%>
-    <%=msg%>
-    <%end%>
-<%= form_for @room do |f|%>
-  <label for="room_name">RoomName</label>
+   <% if(current_user.role_id == 2)%>
+   <%@room.errors.full_messages.each do |msg|%>
+   <%=msg%>
+   <%end%>
+   <%= form_for @room do |f|%>
+   <label for="room_name">RoomName</label>
    <%=f.text_field :name%>
    <label for="room_description">Description</label>
    <%= f.text_field :description%>
@@ -25,5 +26,16 @@
      <%=name.check_box%>
      <%=name.label%>
    <%end%>
-   <%= f.submit "SubmitRoomDetails"%>
-<%end%>
+   <%=f.submit "SubmitRoomDetails"%>
+   <%end%>
+   <%end%>
+   <%if(current_user.role_id == 1)%> 
+     <%@room.errors.full_messages.each do |msg|%>
+         <%=msg%>
+     <%end%>
+   <%= form_for @room do |f|%>
+   <%= f.radio_button :is_authorized,true%>authorize
+   <%= f.radio_button :is_authorized,false%>unauthorize
+   <%=f.submit "Authorize submit"%>
+   <%end%>
+   <%end%>

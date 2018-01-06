@@ -1,0 +1,5 @@
+StartDate:<%= @greeting.start_date%>
+EndDate:<%= @greeting.end_date%>
+is_confirmed:<%= @greeting.is_confirmed%>
+price:<%=(@greeting.price*((@greeting.start_date .. @greeting.end_date).to_a.count))%>
+Wish u A HAppy living
