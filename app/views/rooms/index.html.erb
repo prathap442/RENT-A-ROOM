@@ -24,8 +24,15 @@
     <%binding.pry%>
     <%if(current_user.role_id == 1)%>
        	<%if((room.is_authorized == false)||(room.is_authorized == nil))%>
-          <%binding.pry%>    
-          <%=link_to "Add authorization to the room #{room.name}", edit_room_path(room.id) %><br/>
+          <%binding.pry%>
+          <%=room.name%>    
+          <%=form_for room do |f|%>
+          <%= f.radio_button :is_authorized,true%>authorize
+          <%= f.radio_button :is_authorized,false%>unauthorize
+          <%binding.pry%>
+          <%= f.submit "authorization"%>
+          <%end%><br/>
+          <br/>
         <%end%>
        <%end%> 
 <%end%>
@@ -33,15 +40,15 @@
 
 <br/> <br/> <br/> <br/> <br/> <br/>
 <% if(current_user.role_id == 2)%>
-   MY Rooms(host) here are the rooms
+MY Rooms(host)whose bookings needed to  be confirmed are here
+
       <%@rooms.each do |room|%>
       <%binding.pry%>
       <% if(room.is_authorized == true)%>
       <%if(room.user_id == current_user.id)%>
-         <li><%= room.name %></li>
          <%Booking.all.where({room_id: room.id,is_confirmed: false} ).each do |booking|%>
                <%binding.pry%>            
-               <li><%= link_to "confirm the  rooom slot #{booking.start_date} and #{booking.end_date} #{booking.room.name}", edit_booking_path(booking.id)%><br/></li>
+               <li><%= link_to "confirm the  #{room.name} slot #{booking.start_date} and #{booking.end_date} #{booking.room.name}", edit_booking_path(booking.id)%><br/></li>
                <%binding.pry%>
           <%end%>
         <%end%> 

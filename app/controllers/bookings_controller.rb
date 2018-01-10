@@ -6,7 +6,7 @@ class BookingsController < ApplicationController
   # GET /bookings
   # GET /bookings.json
   def index
-    @bookings = Booking.all
+    @bookings = current_user.bookings
     binding.pry
     #@bookingsegregator = Booking.segregator
   end
@@ -29,13 +29,12 @@ class BookingsController < ApplicationController
 
   # POST /bookings
   # POST /bookings.json
+  #@room=Room.find(params[:booking][:room_id])
+    
   def create
-    @room=Room.find(params[:booking][:room_id])
     @booking = Booking.new(booking_params)
     @booking.user_id=current_user.id
-    binding.pry
-    if !(@booking.logic_of_booking(@room) == -1)       
-      binding.pry
+     binding.pry
       if (@booking.save)
           binding.pry
              NotificationMailer.notification_two(@booking).deliver!
@@ -43,13 +42,10 @@ class BookingsController < ApplicationController
              redirect_to rooms_path,notice: "the room was successfully booked and a mail has beeb sent sayinng that booking is confirmed and needs to be authorized"
       else
           binding.pry
-          redirect_to room_path(@booking.room_id),notice: "the room has already been booked please try to choose the other dates"
+             render action: 'new'
           binding.pry
       end
-     else
-       redirect_to room_path(@booking.room_id)               
-     end
-   end 
+  end 
   
 
   # PATCH/PUT /bookings/1

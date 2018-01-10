@@ -10,11 +10,13 @@
   <%= link_to "All the cities",cities_path%>
   <% if user_signed_in? %>
      welcome<%=current_user.email%>
-        <%= link_to "AccountSettings",edit_user_registration_path%>
-        <%= link_to "Logout",destroy_user_session_path,method: :delete%><br/>
+      <%= link_to "AccountSettings",edit_user_registration_path%>
+      <%=link_to "Your previous bookings",  bookings_path%>      
+      <%= link_to "Logout",destroy_user_session_path,method: :delete%><br/>
         <%= link_to "Amenities",amenities_path%><br/>
         <%= link_to "Rooms",rooms_path%>
-        <%= link_to "MY Rooms",rooms_path%>     
+        <%= link_to "MY Rooms",my_rooms_path%>
+
      <%else%>
         <%= link_to "Login",new_user_session_path%>
         <%= link_to "Registration",new_user_registration_path%>

@@ -9,7 +9,19 @@
      <%= link_to 'Back', cities_path %>
 <%end%>
 <ul>
-<%@city.rooms.each do |room|%>
+
+
+
+<% p=0%>
+<%while(p < 10000)%>
+<% if !(@city.rooms.where('price >= ? AND price <= ?',p,p+1000 ).order(:price).empty?)%>
+<h3>rooms between <%=p%> and <%=p+1000%></h3>
+<% @city.rooms.where('price >= ? AND price <= ?',p,p+1000 ).order(:price).each do |room|%>
    <li><%=link_to room.name,room_path(room.id)%>Price:<%=room.price%>,Images:<%=image_tag(room.images,size: "30x30")%></li>
 <%end%>
-</ul>
+<%end%>
+<%p+=1000%>
+<%end%>
+
+
+

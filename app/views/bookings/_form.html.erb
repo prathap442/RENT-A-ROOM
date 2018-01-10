@@ -20,6 +20,16 @@
     <%= form.label :end_date %>
     <%= form.date_field :end_date, id: :booking_end_date %>
   </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.number_field :price, id: :booking_price %>
+  </div>
+  
+  <div class="field">
+    <%= form.label :room_id %>
+    <%= form.number_field :room_id, id: :booking_room_id %>
+  </div>
   
   <div class="actions">
     <%= form.submit %>

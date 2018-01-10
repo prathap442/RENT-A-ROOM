@@ -1,3 +1,10 @@
+<%if(user_signed_in?)%>
+  <%= @booking.errors.full_messages.each do |msg|%>
+     <%=msg%><br/>
+<%end%>
+<%end%>
+
+
    <br/>
    NAME<%=@room.name%><br/>
    DESCRIPTION:<%=@room.description%><br/>

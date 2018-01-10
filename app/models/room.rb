@@ -10,10 +10,11 @@ mount_uploader :images, CoverUploader
 before_create :assign_the_role_of_guest_to_host
 after_create :assign_the_lat_and_lon_magnitudes
 after_create :make_the_default_authorize
-
  def assign_the_role_of_guest_to_host 
     if !(self.user.role_id == 1)
+    binding.pry
     self.user.update_attributes(role_id: Role.second.id)
+    binding.pry
     end
  end
  def assign_the_lat_and_lon_magnitudes

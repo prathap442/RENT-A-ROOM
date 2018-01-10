@@ -24,14 +24,9 @@ class RoomsController < ApplicationController
     @room.user_id = current_user.id
     
     binding.pry
+    redirect_to rooms_path
     if(@room.save)
-      if(@room.user_id != 1)     
-         @room.user.update_attributes(role_id: Role.second.id)
-         binding.pry
          redirect_to rooms_path
-      else
-         redirect_to rooms_path
-      end
     else  
       binding.pry 
       render action: 'new'

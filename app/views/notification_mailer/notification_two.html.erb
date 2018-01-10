@@ -1,7 +1,6 @@
-#@greeting carries the booked record
 This is to inform the guest that the booking is done and needs to be confirmed by the owner of the stay 
 <%=@greeting.start_date%>
 <%=@greeting.end_date%>
 owner:<%=@greeting.user.username%>
-price:<%=@greeting.room.price%>
+price:<%=(@greeting.room.price*((@greeting.start_date..@greeting.end_date).to_a).count)%>
 <p> NEEDS TO BE CONFIRMED WAIT TILL U GET A REPlY</p>
