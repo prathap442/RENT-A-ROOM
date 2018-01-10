@@ -30,6 +30,14 @@
   <%= @booking.errors.full_messages.each do |msg|%>
      <%=msg%><br/>
   <%end%>
+  <iframe
+    width="600"
+    height="450"
+    frameborder="0" style="border:0"
+    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBr9ez4DKZFKkYmkLdO3ze_PGOKBxC2vAg&q=#{@room.address}" allowfullscreen>
+   </iframe> 
+
+  
 
   <%= form_for @booking do |f|%>
   <label for="booking_start_date">Start_date</label>
