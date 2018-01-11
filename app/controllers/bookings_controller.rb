@@ -40,7 +40,7 @@ class BookingsController < ApplicationController
              NotificationMailer.notification_two(@booking).deliver!
              NotificationMailer.notification_three(@booking).deliver!          
              redirect_to rooms_path,notice: "the room was successfully booked and a mail has beeb sent sayinng that booking is confirmed and needs to be authorized"
-      else
+      else  
           binding.pry
              render action: 'new'
           binding.pry
@@ -52,7 +52,10 @@ class BookingsController < ApplicationController
   # PATCH/PUT /bookings/1.json
   def update
          @booking=Booking.find(params[:id])
+         binding.pry
          @booking.update_attributes(booking_params)
+
+         binding.pry
          redirect_to rooms_path, notice: 'Booking was successfully updated.'   
     if(@booking.is_confirmed == true)
         NotificationMailer.notification_four(@booking).deliver! 

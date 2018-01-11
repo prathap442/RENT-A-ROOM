@@ -2,8 +2,8 @@
 class Booking < ApplicationRecord
 belongs_to :user
 belongs_to :room
-before_validation :check_valid_date
-before_validation :logic_of_booking#this checks the logic
+validate :check_valid_date,on: :create
+validate :logic_of_booking,on: :create#this checks the logic
 validate :set_is_confirmed_to_be_false, on: :create
 validates_presence_of :start_date,:end_date,:user_id,:room_id
 before_save :set_the_room_price

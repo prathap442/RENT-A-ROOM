@@ -49,6 +49,7 @@ MY Rooms(host)whose bookings needed to  be confirmed are here
          <%Booking.all.where({room_id: room.id,is_confirmed: false} ).each do |booking|%>
                <%binding.pry%>            
                <li><%= link_to "confirm the  #{room.name} slot #{booking.start_date} and #{booking.end_date} #{booking.room.name}", edit_booking_path(booking.id)%><br/></li>
+               <li><%= link_to "Delete the room booking",booking_path(booking.id), method: :delete,data: {confirm: "are u sure"} %></li>
                <%binding.pry%>
           <%end%>
         <%end%> 
